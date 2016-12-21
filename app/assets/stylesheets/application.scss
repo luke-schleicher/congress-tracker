@@ -16,3 +16,17 @@ a.site-name:hover, a.site-name:active {
   right: 10px;
   top: 0px;
 }
+
+.congressmen {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.congressman {
+  margin: 1em;
+  .identifier {
+    font-size: 1.25em;
+    margin-top: .5em;
+  }
+}
