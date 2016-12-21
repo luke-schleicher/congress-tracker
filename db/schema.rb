@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20161221224458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "reps", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "party"
+    t.string   "state"
+    t.string   "chamber"
+    t.date     "term_start"
+    t.date     "term_end"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "website"
+    t.string   "facebook_url"
+    t.string   "twitter_url"
+    t.string   "youtube_url"
+    t.string   "fax"
+    t.string   "contact_form_url"
+    t.string   "photo_url"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "house"
+  end
 
 end
