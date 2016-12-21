@@ -1,0 +1,32 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+.site-name {
+  color: #777;
+  margin: 10px;
+  font-size: 1.5em;
+  display: block;
+}
+a.site-name:hover, a.site-name:active {
+  color: #777;
+}
+
+.login-links {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+
+.congressmen {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.congressman {
+  margin: 1em;
+  .identifier {
+    font-size: 1.25em;
+    margin-top: .5em;
+  }
+}

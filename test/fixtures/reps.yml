@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  party: MyString
+  state: MyString
+  chamber: MyString
+  term_start: 2016-12-21
+  term_end: 2016-12-21
+  phone: MyString
+  email: MyString
+  website: MyString
+  facebook_url: MyString
+  twitter_url: MyString
+  youtube_url: MyString
+  fax: MyString
+  contact_form_url: MyString
+  photo_url: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  party: MyString
+  state: MyString
+  chamber: MyString
+  term_start: 2016-12-21
+  term_end: 2016-12-21
+  phone: MyString
+  email: MyString
+  website: MyString
+  facebook_url: MyString
+  twitter_url: MyString
+  youtube_url: MyString
+  fax: MyString
+  contact_form_url: MyString
+  photo_url: MyString
