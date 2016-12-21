@@ -1,0 +1,12 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+.site-name {
+  color: #777;
+  margin: 10px;
+  font-size: 1.5em;
+  display: block;
+}
+a.site-name:hover, a.site-name:active {
+  color: #777;
+}
