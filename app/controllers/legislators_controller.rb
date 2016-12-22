@@ -1,13 +1,12 @@
 class LegislatorsController < ApplicationController
 
   def index
-    ids = session[:reps]
+    bioguide_ids = session[:reps]
     @user = User.new
     @reps = []
     @senators = []
-    ids.each do |id|
-      kfsdflj
-      current = Legislator.find(id)
+    bioguide_ids.each do |bioguide_id|
+      current = Legislator.find(bioguide_id)
       if current.chamber == "house"
         @reps << current
       elsif current.chamber == "senate"
@@ -17,6 +16,6 @@ class LegislatorsController < ApplicationController
   end
 
   def show
-    @legislator = Legislator.find_by_id(params[:id])
+    @legislator = Legislator.find(params[:bioguide_id])
   end
 end

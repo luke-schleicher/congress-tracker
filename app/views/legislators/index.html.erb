@@ -4,7 +4,7 @@
       <h2>Your <%= "Representative".pluralize(@reps.count) %> in the House:</h2>
       <div class="congressmen">
         <% @reps.each do |rep| %>
-          <a class="congressman" href="<%= legislator_path(rep) %>">
+          <a class="congressman" href="<%= legislator_path(rep.id) %>">
             <%= image_tag rep.photo_url %>
             <div class="identifier">
               <%= "#{rep.first_name} #{rep.last_name} (#{rep.party}-#{rep.state})" %>
@@ -15,7 +15,7 @@
       <h2>Your Senators are:</h2>
       <div class="congressmen">
         <% @senators.each do |senator| %>
-          <a class="congressman" href="<%= legislator_path(senator) %>">
+          <a class="congressman" href="<%= legislator_path(senator.id) %>">
             <%= image_tag senator.photo_url %>
             <div class="identifier">
               <%= "#{senator.first_name} #{senator.last_name} (#{senator.party}-#{senator.state})" %>
