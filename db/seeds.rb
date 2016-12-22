@@ -108,7 +108,7 @@ NUMBER_OF_VOTE_PAGES = 92
 votes = "votes?congress=114&fields=voter_ids,bill_id&page="
 vote_data = []
 
-2.times do |page|
+NUMBER_OF_VOTE_PAGES.times do |page|
   vote_page = votes + (page + 1).to_s
   url = build_url(vote_page)
   response = HTTParty.get(url)
