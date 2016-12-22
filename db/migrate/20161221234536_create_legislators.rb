@@ -1,6 +1,7 @@
 class CreateLegislators < ActiveRecord::Migration[5.0]
   def change
-    create_table :legislators do |t|
+    create_table :legislators , id: false do |t|
+      t.string :bioguide_id, null: false
       t.string :first_name
       t.string :last_name
       t.string :party
@@ -16,14 +17,12 @@ class CreateLegislators < ActiveRecord::Migration[5.0]
       t.string :twitter_url
       t.string :youtube_url
       t.string :fax
-      t.string :photo_url
       t.string :gender
       t.string :votesmart_id
       t.string :office
       t.date :birthday
-      t.string :bioguide_id
-
       t.timestamps
     end
+    add_index :legislators, :bioguide_id, unique: true
   end
 end
