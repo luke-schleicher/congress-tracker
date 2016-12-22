@@ -1,18 +1,31 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
-# read from current legislators file and populate database with it
+########################
+# Deleting
+########################
+
+puts "Removing records"
+
+Legislator.destroy_all
+Bill.destroy_all
+Vote.destroy_all
+
+puts "Records removed"
+
+
+########################
+# Set Up
+########################
 
 def build_url(query)
   ENDPOINT + query
 end
 
 ENDPOINT = "https://congress.api.sunlightfoundation.com/"
+
+
+########################
+# Legislators
+########################
 
 NUMBER_OF_LEGISLATOR_PAGES = 27
 legislators = "legislators?page="
@@ -24,6 +37,7 @@ NUMBER_OF_LEGISLATOR_PAGES.times do |page|
   response = HTTParty.get(url)
   legislator_data << response
 end
+
 
 puts "Getting legislators..."
 
@@ -50,7 +64,11 @@ legislator_data.each.with_index do |page, i|
   puts "Compiled legislator data from page #{i} of Sunlight's database."
 end
 
+puts "Finished adding legislators to database"
 
+########################
+# Bills
+########################
 
 NUMBER_OF_BILL_PAGES = 13
 bills = "bills?congress=114&history.enacted=true&page="
@@ -80,5 +98,39 @@ bill_data.each.with_index do |page, i|
   puts "Compiled bill data from page #{i} of Sunlight's database."
 end
 
+puts "Finished adding bills to database"
+
+########################
+# Votes
+########################
+
+NUMBER_OF_VOTE_PAGES = 92
+votes = "votes?congress=114&fields=voter_ids,bill_id&page="
+vote_data = []
+
+2.times do |page|
+  vote_page = votes + (page + 1).to_s
+  url = build_url(vote_page)
+  response = HTTParty.get(url)
+  vote_data << response
+end
+
+puts "Getting votes..."
+
+vote_data.each.with_index do |page, i|
+  page["results"].each do |vote|
+    bill_id = vote["bill_id"]
+    vote["voter_ids"].each do |voter, type|
+      v = Vote.new
+      v.bill_id = bill_id
+      v.voter_id = voter
+      v.vote_type = type
+      v.save
+    end
+  end
+  puts "Compiled vote data from page #{i} of Sunlight's database."
+end
+
+puts "Finished compiling vote data"
 
 
