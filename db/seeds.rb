@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-puts "clearing database...."
-
-Bill.destroy_all
-Legislator.destroy_all
-
-puts "Database cleared...."
-
-
-VoteSmart.api_key = ENV["secret_key"]
-
-
-
-=======
-
 ########################
 # Deleting
 ########################
@@ -25,11 +10,11 @@ Vote.destroy_all
 
 puts "Records removed"
 
+VoteSmart.api_key = ENV["VOTESMART_KEY"]
 
 ########################
 # Set Up
 ########################
->>>>>>> 70fab01ac781a65dfd4c68b21d676c87b4f2136a
 
 def build_url(query)
   ENDPOINT + query
@@ -43,6 +28,8 @@ ENDPOINT = "https://congress.api.sunlightfoundation.com/"
 # Legislators
 ########################
 
+puts "Getting legislators..."
+
 NUMBER_OF_LEGISLATOR_PAGES = 27
 legislators = "legislators?page="
 legislator_data = []
@@ -53,9 +40,6 @@ NUMBER_OF_LEGISLATOR_PAGES.times do |page|
   response = HTTParty.get(url)
   legislator_data << response
 end
-
-
-puts "Getting legislators..."
 
 legislator_data.each.with_index do |page, i|
   page["results"].each do |legislator|
@@ -104,16 +88,11 @@ legislator_data.each.with_index do |page, i|
     l.save
 
     puts $fuck if l.votesmart_id.nil?
+  end
 end
 
-<<<<<<< HEAD
 puts "Legislators... created"
 
-
-
-=======
-puts "Finished adding legislators to database"
->>>>>>> 70fab01ac781a65dfd4c68b21d676c87b4f2136a
 
 ########################
 # Bills
@@ -146,9 +125,6 @@ bill_data.each.with_index do |page, i|
   end
   puts "Compiled bill data from page #{i} of Sunlight's database."
 end
-<<<<<<< HEAD
-end
-=======
 
 puts "Finished adding bills to database"
 
@@ -156,7 +132,7 @@ puts "Finished adding bills to database"
 # Votes
 ########################
 
-NUMBER_OF_VOTE_PAGES = 92
+NUMBER_OF_VOTE_PAGES = 0 # 92
 votes = "votes?congress=114&fields=voter_ids,bill_id&page="
 vote_data = []
 
@@ -184,6 +160,3 @@ vote_data.each.with_index do |page, i|
 end
 
 puts "Finished compiling vote data"
-
-
->>>>>>> 70fab01ac781a65dfd4c68b21d676c87b4f2136a
