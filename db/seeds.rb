@@ -134,7 +134,7 @@ puts "Finished adding bills to database"
 # Votes
 ########################
 
-NUMBER_OF_VOTE_PAGES = 0 # 92
+NUMBER_OF_VOTE_PAGES = 2 # 92
 votes = "votes?congress=114&fields=voter_ids,bill_id&page="
 vote_data = []
 
