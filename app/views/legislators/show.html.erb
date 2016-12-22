@@ -23,19 +23,19 @@
         <% if @legislator.contact_form_url %><%= link_to "Contact form", @legislator.contact_form_url %><% end %>
       </p>
     </div>
-    <div class="link-boxes">
+    <div class="social-media-links">
       <% if @legislator.facebook_url %>
-        <%= link_to @legislator.facebook_url, class: "link-box" do %>
+        <%= link_to @legislator.facebook_url, class: "social-media-link" do %>
           <%= fa_icon "facebook-square 3x" %>
         <% end %>
       <% end %>
       <% if @legislator.twitter_url %>
-        <%= link_to @legislator.twitter_url, class: "link-box" do %>
+        <%= link_to @legislator.twitter_url, class: "social-media-link" do %>
           <%= fa_icon "twitter-square 3x" %>
         <% end %>
       <% end %>
       <% if @legislator.youtube_url %>
-        <%= link_to @legislator.youtube_url, class: "link-box" do %>
+        <%= link_to @legislator.youtube_url, class: "social-media-link" do %>
           <%= fa_icon "youtube-square 3x" %>
         <% end %>
       <% end %>

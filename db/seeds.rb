@@ -45,9 +45,9 @@ legislator_data.each.with_index do |page, i|
   page["results"].each do |legislator|
     l = Legislator.new
     l.fax = legislator["fax"]
-    l.twitter_url = legislator["twitter_id"]
-    l.youtube_url = legislator["youtube_id"]
-    l.facebook_url = legislator["facebook_id"]
+    l.twitter_url = "https://twitter.com/" + legislator["twitter_id"].to_s
+    l.youtube_url = "https://youtube.com/" + legislator["youtube_id"].to_s
+    l.facebook_url = "https://facebook.com/" + legislator["facebook_id"].to_s
     l.chamber = legislator["chamber"]
     l.party = legislator["party"]
     l.first_name = legislator["first_name"]
@@ -134,31 +134,31 @@ puts "Finished adding bills to database"
 # Votes
 ########################
 
-# NUMBER_OF_VOTE_PAGES = 2 # 92
-# votes = "votes?congress=114&fields=voter_ids,bill_id&page="
-# vote_data = []
+NUMBER_OF_VOTE_PAGES = 2 # 92
+votes = "votes?congress=114&fields=voter_ids,bill_id&page="
+vote_data = []
 
-# NUMBER_OF_VOTE_PAGES.times do |page|
-#   vote_page = votes + (page + 1).to_s
-#   url = build_url(vote_page)
-#   response = HTTParty.get(url)
-#   vote_data << response
-# end
+NUMBER_OF_VOTE_PAGES.times do |page|
+  vote_page = votes + (page + 1).to_s
+  url = build_url(vote_page)
+  response = HTTParty.get(url)
+  vote_data << response
+end
 
-# puts "Getting votes..."
+puts "Getting votes..."
 
-# vote_data.each.with_index do |page, i|
-#   page["results"].each do |vote|
-#     bill_id = vote["bill_id"]
-#     vote["voter_ids"].each do |voter, type|
-#       v = Vote.new
-#       v.bill_id = bill_id
-#       v.voter_id = voter
-#       v.vote_type = type
-#       v.save
-#     end
-#   end
-#   puts "Compiled vote data from page #{i} of Sunlight's database."
-# end
+vote_data.each.with_index do |page, i|
+  page["results"].each do |vote|
+    bill_id = vote["bill_id"]
+    vote["voter_ids"].each do |voter, type|
+      v = Vote.new
+      v.bill_id = bill_id
+      v.voter_id = voter
+      v.vote_type = type
+      v.save
+    end
+  end
+  puts "Compiled vote data from page #{i} of Sunlight's database."
+end
 
-# puts "Finished compiling vote data"
+puts "Finished compiling vote data"
