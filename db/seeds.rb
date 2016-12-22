@@ -1,22 +1,20 @@
+puts "clearing database...."
+
+Bill.destroy_all
+Legislator.destroy_all
+
+puts "Database cleared...."
+
+
 VoteSmart.api_key = ENV["secret_key"]
+
+
+
 
 def build_url(query)
   ENDPOINT + query
 end
 
-def get_votesmart_id(sunset_object)
-  sunset_state = sunset_object["state"]
-  sunset_lastname = sunset_object["last_name"]
-
-  api_call = VoteSmart::Official.get_by_lastname(sunset_lastname)
-  matching_candidates = api_call["candidateList"]["candidate"]
-
-  matching_candidates.each do |candidate|
-    if candidate["officeStateId"] == sunset_state
-      return candidate["candidateId"]
-    end
-  end
-end
 
 ENDPOINT = "https://congress.api.sunlightfoundation.com/"
 
@@ -47,20 +45,44 @@ legislator_data.each.with_index do |page, i|
     l.term_end = legislator["term_end"]
     l.state = legislator["state"]
 
-    if legislator["votesmart_id"]
-      l.votesmart_id = legislator["votesmart_id"]
+    sunset_state = legislator["state"]
+
+    sunset_votesmart_id = legislator["votesmart_id"].to_s
+
+    if sunset_votesmart_id.empty?
+      api_call = VoteSmart::Official.get_by_lastname(legislator["last_name"])
+
+      if api_call.to_s.include?("error")
+        sunset_votesmart_id = "N/A"
       else
-        l.votesmart_id = get_votesmart_id(legislator)
+        matching_candidates = api_call["candidateList"]["candidate"]
+
+        if Array === matching_candidates
+          matching_candidates.each do |candidate|
+            sunset_votesmart_id = candidate["candidateId"] if candidate["officeStateId"] == sunset_state
+          end
+        elsif Hash === matching_candidates #If only one candidate, it'll be a hash instead
+          sunset_votesmart_id =  api_call["candidateList"]["candidate"]["candidateId"]
+        end
+      end
     end
+
+    l.votesmart_id = sunset_votesmart_id.to_s
+
+
 
     l.phone = legislator["phone"]
     l.office = legislator["office"]
     l.birthday = legislator["birthday"]
     l.bioguide_id = legislator["bioguide_id"]
     l.save
-  end
-  puts "Compiled legislator data from page #{i} of Sunlight's database."
+
+    puts $fuck if l.votesmart_id.nil?
 end
+
+puts "Legislators... created"
+
+
 
 
 
@@ -90,4 +112,5 @@ bill_data.each.with_index do |page, i|
     b.save
   end
   puts "Compiled bill data from page #{i} of Sunlight's database."
+end
 end

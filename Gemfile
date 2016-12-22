@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem "figaro"
 gem 'patron', '>=0.4.6'
 gem 'votesmart'
-
+gem 'typhoeus'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -14,7 +14,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
+# Use Uglifier as compressor for JavaScript assets'lib/vote_smart/common.rb'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
