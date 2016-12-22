@@ -2,6 +2,7 @@ class LegislatorsController < ApplicationController
 
   def index
     ids = session[:reps]
+    @user = User.new
     @reps = []
     @senators = []
     ids.each do |id|
