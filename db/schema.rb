@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161221234536) do
+ActiveRecord::Schema.define(version: 20161222004348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.integer  "bill_id"
+    t.string   "official_title"
+    t.string   "popular_title"
+    t.text     "summary_short"
+    t.date     "introduced_on"
+    t.date     "last_vote_at"
+    t.text     "keywords"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "legislators", force: :cascade do |t|
     t.string   "first_name"

@@ -13,6 +13,7 @@ def build_url(query)
 end
 
 ENDPOINT = "https://congress.api.sunlightfoundation.com/"
+
 NUMBER_OF_LEGISLATOR_PAGES = 27
 legislators = "legislators?page="
 legislator_data = []
@@ -25,6 +26,7 @@ NUMBER_OF_LEGISLATOR_PAGES.times do |page|
 end
 
 puts "Getting legislators..."
+
 legislator_data.each.with_index do |page, i|
   page["results"].each do |legislator|
     l = Legislator.new
@@ -47,3 +49,36 @@ legislator_data.each.with_index do |page, i|
   end
   puts "Compiled legislator data from page #{i} of Sunlight's database."
 end
+
+
+
+NUMBER_OF_BILL_PAGES = 13
+bills = "bills?congress=114&history.enacted=true&page="
+bill_data = []
+
+NUMBER_OF_BILL_PAGES.times do |page|
+  bill_page = bills + (page + 1).to_s
+  url = build_url(bill_page)
+  response = HTTParty.get(url)
+  bill_data << response
+end
+
+puts "Getting bills..."
+
+bill_data.each.with_index do |page, i|
+  page["results"].each do |bill|
+    b = Bill.new
+    b.bill_id = bill["bill_id"]
+    b.official_title = bill["official_title"]
+    b.popular_title = bill["popular_title"]
+    b.summary_short = bill["summary_short"]
+    b.introduced_on = bill["introduced_on"]
+    b.last_vote_at = bill["last_vote_at"]
+    b.keywords = bill["keywords"]
+    b.save
+  end
+  puts "Compiled bill data from page #{i} of Sunlight's database."
+end
+
+
+
