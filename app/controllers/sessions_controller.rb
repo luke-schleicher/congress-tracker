@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
       reps << Legislator.find_by_votesmart_id(result["votesmart_id"].to_s).id
     end
     session[:reps] = reps
+    flash[:success] = "Found your legislators!"
     redirect_to legislators_path
   end
 
