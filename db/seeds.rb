@@ -8,21 +8,6 @@
 
 # read from current legislators file and populate database with it
 
-puts "Destroying all reps"
-Rep.destroy_all
-
-puts "Creating some House reps"
-Rep.create(first_name: "Louis", last_name: "Gohmert", party: "R", state: "TX", house: "House", photo_url:"https://upload.wikimedia.org/wikipedia/comm
-ons/thumb/2/2d/Louie_Gohmert_official_congressional_photo.jpg/200px-Louie_Gohmert_official_congressional_photo.jpg")
-Rep.create(first_name: "Ted", last_name: "Poe", party: "R", state: "TX", house: "House", photo_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Ted_Poe_Official.jpg/200px-Ted_Poe_Official.jpg")
-Rep.create(first_name: "Al", last_name: "Green", party: "D", state: "TX", house: "House", photo_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Al_Green_Official.jpg/200px-Al_Green_Official.jpg")
-
-puts "Creating some Senators"
-Rep.create(first_name: "John", last_name: "Cornyn", party: "R", state: "TX", house: "Senate", photo_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/John_Cornyn_official_portrait%2C_2009.jpg/200px-John_Cornyn_official_portrait%2C_2009.jpg")
-Rep.create(first_name: "Ted", last_name: "Cruz", party: "R", state: "TX", house: "Senate", photo_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Ted_Cruz%2C_official_portrait%2C_113th_Congress.jpg/200px-Ted_Cruz%2C_official_portrait%2C_113th_Congress.jpg")
-
-puts "Seeding finished."
-
 def build_url(query)
   ENDPOINT + query
 end
@@ -39,8 +24,26 @@ NUMBER_OF_LEGISLATOR_PAGES.times do |page|
   legislator_data << response
 end
 
-legislator_data[0]["results"]
-
-legislator_data.each do |page|
-
+puts "Getting legislators..."
+legislator_data.each.with_index do |page, i|
+  page["results"].each do |legislator|
+    l = Legislator.new
+    l.chamber = legislator["chamber"]
+    l.party = legislator["party"]
+    l.first_name = legislator["first_name"]
+    l.last_name = legislator["last_name"]
+    l.gender = legislator["gender"]
+    l.email = legislator["oc_email"]
+    l.votesmart_id = legislator["votesmart_id"]
+    l.website = legislator["website"]
+    l.term_start = legislator["term_start"]
+    l.term_end = legislator["term_end"]
+    l.state = legislator["state"]
+    l.phone = legislator["phone"]
+    l.office = legislator["office"]
+    l.birthday = legislator["birthday"]
+    l.bioguide_id = legislator["bioguide_id"]
+    l.save
+  end
+  puts "Compiled legislator data from page #{i} of Sunlight's database."
 end

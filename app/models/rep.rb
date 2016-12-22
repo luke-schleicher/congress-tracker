@@ -1,2 +1,0 @@
-class Rep < ApplicationRecord
-end

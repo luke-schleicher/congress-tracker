@@ -5,7 +5,7 @@
       <div class="congressmen">
         <% @reps.each do |rep| %>
           <div class="congressman">
-            <%= image_tag rep.photo_url %>
+            <%= image_tag rep.photo_url ? rep.photo_url : "http://lorempixel.com/200/200/cats" %>
             <div class="identifier">
               <%= "#{rep.first_name} #{rep.last_name} (#{rep.party}-#{rep.state})" %>
             </div>
@@ -16,7 +16,7 @@
       <div class="congressmen">
         <% @senators.each do |senator| %>
           <div class="congressman">
-            <%= image_tag senator.photo_url %>
+            <%= image_tag senator.photo_url ? senator.photo_url : "http://lorempixel.com/200/200/cats" %>
             <div class="identifier">
               <%= "#{senator.first_name} #{senator.last_name} (#{senator.party}-#{senator.state})" %>
             </div>

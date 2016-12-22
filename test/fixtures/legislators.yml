@@ -11,12 +11,17 @@ one:
   phone: MyString
   email: MyString
   website: MyString
+  contact_form_url: MyString
   facebook_url: MyString
   twitter_url: MyString
   youtube_url: MyString
   fax: MyString
-  contact_form_url: MyString
   photo_url: MyString
+  gender: MyString
+  votesmart_id: MyString
+  office: MyString
+  birthday: 2016-12-21
+  bioguide_id: MyString
 
 two:
   first_name: MyString
@@ -29,9 +34,14 @@ two:
   phone: MyString
   email: MyString
   website: MyString
+  contact_form_url: MyString
   facebook_url: MyString
   twitter_url: MyString
   youtube_url: MyString
   fax: MyString
-  contact_form_url: MyString
   photo_url: MyString
+  gender: MyString
+  votesmart_id: MyString
+  office: MyString
+  birthday: 2016-12-21
+  bioguide_id: MyString
