@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     json = HTTParty.get(sunlight_url)
     reps = []
     json["results"].each do |result|
-      reps << Legislator.find_by_votesmart_id(result["votesmart_id"].to_s).id
+      reps << Legislator.find(result["bioguide_id"].to_s).id
     end
     session[:reps] = reps
     flash[:success] = "Found your legislators!"

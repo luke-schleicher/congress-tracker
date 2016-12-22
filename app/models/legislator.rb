@@ -9,6 +9,10 @@ class Legislator < ApplicationRecord
     "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{self.votesmart_id}.jpg"
   end
 
+  def bioguide_id
+    bioguide_id
+  end
+
   def to_param
     bioguide_id.parameterize
   end

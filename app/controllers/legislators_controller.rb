@@ -6,7 +6,8 @@ class LegislatorsController < ApplicationController
     @reps = []
     @senators = []
     ids.each do |id|
-      current = Legislator.find_by_id(id)
+      kfsdflj
+      current = Legislator.find(id)
       if current.chamber == "house"
         @reps << current
       elsif current.chamber == "senate"
