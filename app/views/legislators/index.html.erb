@@ -5,7 +5,7 @@
       <div class="congressmen">
         <% @reps.each do |rep| %>
           <div class="congressman">
-            <%= image_tag rep.photo_url ? rep.photo_url : "http://lorempixel.com/200/200/cats" %>
+            <%= image_tag "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{rep.votesmart_id}.jpg" %>
             <div class="identifier">
               <%= "#{rep.first_name} #{rep.last_name} (#{rep.party}-#{rep.state})" %>
             </div>
@@ -16,7 +16,7 @@
       <div class="congressmen">
         <% @senators.each do |senator| %>
           <div class="congressman">
-            <%= image_tag senator.photo_url ? senator.photo_url : "http://lorempixel.com/200/200/cats" %>
+            <%= image_tag "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{senator.votesmart_id}.jpg" %>
             <div class="identifier">
               <%= "#{senator.first_name} #{senator.last_name} (#{senator.party}-#{senator.state})" %>
             </div>
@@ -25,15 +25,41 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <%= form_tag "/reps/find", method: :get do %>
-        <%= label_tag 'search', "Find a congressman:" do %>
+      <%= form_tag "/reps/find", method: :get, class: 'form' do %>
+        <div class="form-group">
+          <%= label_tag 'congressman_search', "Find a congressman:" %>
           <%= text_field_tag(
-              :search,
-              params[:search],
+              :congressman_search,
+              params[:congressman_search],
               placeholder: "Search",
               class: "form-control"
           ) %>
-        <% end %>
+          <%= submit_tag "Search", class:'sr-only' %>
+        </div>
+      <% end %>
+      <%= form_tag "/bills/find", method: :get, class: 'form' do %>
+        <div class="form-group">
+          <%= label_tag 'bill_search', "Find a bill:" %>
+          <%= text_field_tag(
+              :bill_search,
+              params[:bill_search],
+              placeholder: "Search",
+              class: "form-control"
+          ) %>
+          <%= submit_tag "Search", class:'sr-only' %>
+        </div>
+      <% end %>
+      <%= form_tag "/", method: :get, class: 'form' do %>
+        <div class="form-group">
+          <%= label_tag 'email_updates', "Get email updates about your legislators:" %>
+          <%= text_field_tag(
+              :email_updates,
+              params[:email_updates],
+              placeholder: "email",
+              class: "form-control"
+          ) %>
+          <%= submit_tag "Submit", class:'sr-only' %>
+        </div>
       <% end %>
     </div>
   </div>
