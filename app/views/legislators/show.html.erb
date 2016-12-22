@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="congressman">
+        <%= image_tag @legislator.photo_url %>
+        <div class="identifier">
+          <%= "#{@legislator.first_name} #{@legislator.last_name} (#{@legislator.party}-#{@legislator.state})" %>
+        </div>
+      </div>
+      <div>
+        <p>Term start: <%= @legislator.term_start %>
+        <p>Term end: <%= @legislator.term_end %>
+      </div>
+    </div>
+  </div>
+</div>

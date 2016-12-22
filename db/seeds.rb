@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 puts "clearing database...."
 
 Bill.destroy_all
@@ -10,6 +11,25 @@ VoteSmart.api_key = ENV["secret_key"]
 
 
 
+=======
+
+########################
+# Deleting
+########################
+
+puts "Removing records"
+
+Legislator.destroy_all
+Bill.destroy_all
+Vote.destroy_all
+
+puts "Records removed"
+
+
+########################
+# Set Up
+########################
+>>>>>>> 70fab01ac781a65dfd4c68b21d676c87b4f2136a
 
 def build_url(query)
   ENDPOINT + query
@@ -17,6 +37,11 @@ end
 
 
 ENDPOINT = "https://congress.api.sunlightfoundation.com/"
+
+
+########################
+# Legislators
+########################
 
 NUMBER_OF_LEGISLATOR_PAGES = 27
 legislators = "legislators?page="
@@ -28,6 +53,7 @@ NUMBER_OF_LEGISLATOR_PAGES.times do |page|
   response = HTTParty.get(url)
   legislator_data << response
 end
+
 
 puts "Getting legislators..."
 
@@ -80,11 +106,18 @@ legislator_data.each.with_index do |page, i|
     puts $fuck if l.votesmart_id.nil?
 end
 
+<<<<<<< HEAD
 puts "Legislators... created"
 
 
 
+=======
+puts "Finished adding legislators to database"
+>>>>>>> 70fab01ac781a65dfd4c68b21d676c87b4f2136a
 
+########################
+# Bills
+########################
 
 NUMBER_OF_BILL_PAGES = 13
 bills = "bills?congress=114&history.enacted=true&page="
@@ -113,4 +146,44 @@ bill_data.each.with_index do |page, i|
   end
   puts "Compiled bill data from page #{i} of Sunlight's database."
 end
+<<<<<<< HEAD
 end
+=======
+
+puts "Finished adding bills to database"
+
+########################
+# Votes
+########################
+
+NUMBER_OF_VOTE_PAGES = 92
+votes = "votes?congress=114&fields=voter_ids,bill_id&page="
+vote_data = []
+
+NUMBER_OF_VOTE_PAGES.times do |page|
+  vote_page = votes + (page + 1).to_s
+  url = build_url(vote_page)
+  response = HTTParty.get(url)
+  vote_data << response
+end
+
+puts "Getting votes..."
+
+vote_data.each.with_index do |page, i|
+  page["results"].each do |vote|
+    bill_id = vote["bill_id"]
+    vote["voter_ids"].each do |voter, type|
+      v = Vote.new
+      v.bill_id = bill_id
+      v.voter_id = voter
+      v.vote_type = type
+      v.save
+    end
+  end
+  puts "Compiled vote data from page #{i} of Sunlight's database."
+end
+
+puts "Finished compiling vote data"
+
+
+>>>>>>> 70fab01ac781a65dfd4c68b21d676c87b4f2136a
