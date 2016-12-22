@@ -31,7 +31,7 @@ ENDPOINT = "https://congress.api.sunlightfoundation.com/"
 puts "Getting legislators..."
 
 NUMBER_OF_LEGISLATOR_PAGES = 27
-legislators = "legislators?page="
+legislators = "legislators?fields=bioguide_id,fax,first_name,last_name,birthday,chamber,gender,oc_email,party,phone,state,term_end,term_start,website,twitter_id,facebook_id,youtube_id,votesmart_id,office&page="
 legislator_data = []
 
 NUMBER_OF_LEGISLATOR_PAGES.times do |page|
@@ -44,6 +44,10 @@ end
 legislator_data.each.with_index do |page, i|
   page["results"].each do |legislator|
     l = Legislator.new
+    l.fax = legislator["fax"]
+    l.twitter_url = legislator["twitter_id"]
+    l.youtube_url = legislator["youtube_id"]
+    l.facebook_url = legislator["facebook_id"]
     l.chamber = legislator["chamber"]
     l.party = legislator["party"]
     l.first_name = legislator["first_name"]
@@ -78,8 +82,6 @@ legislator_data.each.with_index do |page, i|
     end
 
     l.votesmart_id = sunset_votesmart_id.to_s
-
-
 
     l.phone = legislator["phone"]
     l.office = legislator["office"]
