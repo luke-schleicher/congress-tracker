@@ -1,26 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
-      <h2>Your Representatives are:</h2>
+      <h2>Your <%= "Representative".pluralize(@reps.count) %> in the House:</h2>
       <div class="congressmen">
         <% @reps.each do |rep| %>
-          <div class="congressman">
-            <%= image_tag "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{rep.votesmart_id}.jpg" %>
+          <a class="congressman" href="<%= legislator_path(rep) %>">
+            <%= image_tag rep.photo_url %>
             <div class="identifier">
               <%= "#{rep.first_name} #{rep.last_name} (#{rep.party}-#{rep.state})" %>
             </div>
-          </div>
+          </a>
         <% end %>
       </div>
       <h2>Your Senators are:</h2>
       <div class="congressmen">
         <% @senators.each do |senator| %>
-          <div class="congressman">
-            <%= image_tag "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{senator.votesmart_id}.jpg" %>
+          <a class="congressman" href="<%= legislator_path(senator) %>">
+            <%= image_tag senator.photo_url %>
             <div class="identifier">
               <%= "#{senator.first_name} #{senator.last_name} (#{senator.party}-#{senator.state})" %>
             </div>
-          </div>
+          </a>
         <% end %>
       </div>
     </div>

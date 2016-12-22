@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222004348) do
+ActiveRecord::Schema.define(version: 20161222015144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20161222004348) do
     t.string   "twitter_url"
     t.string   "youtube_url"
     t.string   "fax"
-    t.string   "photo_url"
     t.string   "gender"
     t.string   "votesmart_id"
     t.string   "office"

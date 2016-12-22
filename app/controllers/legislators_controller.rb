@@ -1,7 +1,20 @@
 class LegislatorsController < ApplicationController
 
   def index
-    @reps = Legislator.where(chamber: "house").limit(5)
-    @senators = Legislator.where(chamber: "senate").limit(2)
+    ids = session[:reps]
+    @reps = []
+    @senators = []
+    ids.each do |id|
+      current = Legislator.find_by_id(id)
+      if current.chamber == "house"
+        @reps << current
+      elsif current.chamber == "senate"
+        @senators << current
+      end
+    end
+  end
+
+  def show
+    @legislator = Legislator.find_by_id(params[:id])
   end
 end
