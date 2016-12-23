@@ -116,7 +116,11 @@ puts "Getting bills..."
 bill_data.each.with_index do |page, i|
   page["results"].each do |bill|
     b = Bill.new
-    b.bill_id = bill["bill_id"]
+
+    already_been_dun = []
+    already_been_dun << bill["bill_id"]
+    b.bill_id = bill["bill_id"] unless already_been_dun.include?(bill["bill_id"])
+
     b.official_title = bill["official_title"]
     b.popular_title = bill["popular_title"]
     b.summary_short = bill["summary_short"]
