@@ -35,7 +35,6 @@ class Legislator < ApplicationRecord
   def top_contributions
     top_three = {}
     all_contributions = request_contributions
-    # binding.pry
     3.times do |i|
       contribution = all_contributions[i].first.last
       org = contribution["org_name"]
@@ -45,9 +44,6 @@ class Legislator < ApplicationRecord
     top_three
   end
 
-  # helper :top_contributions
-
-  # {0=>["Eye of the Tiger PAC", "10000"], 1=>["Majority Cmte PAC", "10000"], 2=>["New Cuba PAC", "10000"]}
 
 
 
