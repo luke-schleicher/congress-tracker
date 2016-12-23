@@ -36,6 +36,14 @@
       </div>
     </div>
     <div class="col-lg-6">
+      <% if @sponsored_bills.count > 0 %>
+        <h3>Bills sponsored <small>(since <%= @first_bill_date %>)</small></h3>
+        <ul class="legislator-bills-list">
+          <% @sponsored_bills.each do |bill| %>
+            <li><%= link_to bill[:id].upcase, bill_path(bill[:id]) %> <%= bill[:title] %></li>
+          <% end %>
+        </ul>
+      <% end %>
       <% if @bills.count > 0 %>
         <h3>Bills voted on <small>(since <%= @first_bill_date %>)</small></h3>
         <ul class="legislator-bills-list">

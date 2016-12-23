@@ -24,7 +24,9 @@
       <% @rep_votes.each do |rep_vote| %>
         <div class="rep-voting-panel">
           Your <%= term_of_address(Legislator.find(rep_vote[:voter_id])) %>
-          <%= render partial: 'shared/legislator_photo_block', locals: { legislator: Legislator.find(rep_vote[:voter_id])} %>
+          <%= link_to legislator_path(rep_vote[:voter_id]) do %>
+            <%= render partial: 'shared/legislator_photo_block', locals: { legislator: Legislator.find(rep_vote[:voter_id])} %>
+          <% end %>
           <div style="margin-top: -10px"> voted <%= rep_vote[:vote_type] %></div>
         </div>
       <% end %>
