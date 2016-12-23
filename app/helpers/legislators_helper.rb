@@ -8,4 +8,12 @@ module LegislatorsHelper
       "<strong>#{vote_value}:</strong>".html_safe
     end
   end
+
+  def term_of_address(legislator)
+    if legislator.chamber == 'house'
+      "Representative"
+    elsif legislator.chamber == 'senate'
+      "Senator"
+    end
+  end
 end

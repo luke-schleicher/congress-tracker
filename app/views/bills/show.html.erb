@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= image_tag 'bill.png', class: "img-responsive" %>
+    </div>
+    <div class="col-sm-5">
+      <h1><%= @bill.id.upcase %></h1>
+      <p><%= @bill.official_title %></p>
+    </div>
+    <div class="col-sm-4">
+      <strong>Voters for:</strong>
+      <ul>
+        <li>Democrats: <%= @voters_for[:d] %></li>
+        <li>Republicans: <%= @voters_for[:r] %></li>
+        <li>Independents: <%= @voters_for[:i] %></li>
+      </ul>
+      <strong>Voters against:</strong>
+      <ul>
+        <li>Democrats: <%= @voters_against[:d] %></li>
+        <li>Republicans: <%= @voters_against[:r] %></li>
+        <li>Independents: <%= @voters_against[:i] %></li>
+      </ul>
+
+      <% @rep_votes.each do |rep_vote| %>
+        <div class="rep-voting-panel">
+          Your <%= term_of_address(Legislator.find(rep_vote[:voter_id])) %>
+          <%= link_to legislator_path(rep_vote[:voter_id]) do %>
+            <%= render partial: 'shared/legislator_photo_block', locals: { legislator: Legislator.find(rep_vote[:voter_id])} %>
+          <% end %>
+          <div style="margin-top: -10px"> voted <%= rep_vote[:vote_type] %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

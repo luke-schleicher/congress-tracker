@@ -30,7 +30,7 @@ ENDPOINT = "https://congress.api.sunlightfoundation.com/"
 
 puts "Getting legislators..."
 
-NUMBER_OF_LEGISLATOR_PAGES = 27
+NUMBER_OF_LEGISLATOR_PAGES = 0 # 27
 legislators = "legislators?fields=bioguide_id,fax,first_name,last_name,birthday,chamber,gender,oc_email,party,phone,state,term_end,term_start,website,twitter_id,facebook_id,youtube_id,votesmart_id,office&page="
 legislator_data = []
 
@@ -99,10 +99,8 @@ puts "Legislators... created"
 # Bills
 ########################
 
-NUMBER_OF_BILL_PAGES = 13
-
-bills = "bills?congress=114&page="
-
+NUMBER_OF_BILL_PAGES = 20 #20
+bills = "bills?congress=114&fields=bill_id,official_title,popular_title,summary_short,introduced_on,sponsor_id,last_vote_at,keywords,history.enacted&order=history.enacted&per_page=50&page="
 bill_data = []
 
 NUMBER_OF_BILL_PAGES.times do |page|
@@ -128,6 +126,7 @@ bill_data.each.with_index do |page, i|
     b.last_vote_at = bill["last_vote_at"]
     b.sponsor_id = bill["sponsor_id"]
     b.keywords = bill["keywords"]
+    b.enacted = bill["history"]["enacted"]
     b.save unless already_been_dun.include?(bill["bill_id"])
     already_been_dun << bill["bill_id"]
   end
@@ -141,7 +140,7 @@ puts "Finished adding bills to database"
 ########################
 
 
-NUMBER_OF_VOTE_PAGES = 2 # 92
+NUMBER_OF_VOTE_PAGES = 5 # 92
 
 votes = "votes?congress=114&fields=voter_ids,bill_id,voted_at&page="
 vote_data = []
@@ -155,19 +154,20 @@ end
 
 puts "Getting votes..."
 
-been_dun_part_revenge = []
 vote_data.each.with_index do |page, i|
   page["results"].each do |vote|
+
     bill_id = vote["bill_id"]
     voted_at = vote["voted_at"]
+
     vote["voter_ids"].each do |voter, type|
       v = Vote.new
       v.bill_id = bill_id
+      v.voted_at = voted_at
       v.voter_id = voter
       v.vote_type = type
-      v.voted_at = voted_at
-      v.save unless been_dun_part_revenge.include?(bill_id)
-      been_dun_part_revenge << bill_id
+      v.save 
+
     end
   end
   puts "Compiled vote data from page #{i} of Sunlight's database."
