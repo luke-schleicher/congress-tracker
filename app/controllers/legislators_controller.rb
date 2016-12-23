@@ -25,6 +25,7 @@ class LegislatorsController < ApplicationController
         id: bill.id
       }
     end
+    @bills.delete_if {|bill| bill[:vote] == "Not Voting" }
     first_bill = Bill.order(last_vote_at: :asc).first
     @first_bill_date = first_bill.last_vote_at if first_bill
 
