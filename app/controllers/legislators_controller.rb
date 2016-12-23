@@ -28,10 +28,7 @@ class LegislatorsController < ApplicationController
     @bills.delete_if {|bill| bill[:vote] == "Not Voting" }
     first_bill = Bill.order(last_vote_at: :asc).first
     @first_bill_date = first_bill.last_vote_at if first_bill
-
     @top_contributions = @legislator.top_contributions
-
-    #=> {0=>["National Assn of Realtors", "11500"], 1=>["Coca-Cola Co", "10500"], 2=>["Home Depot", "10500"]}
 
   end
 

@@ -6,15 +6,20 @@ class SessionsController < ApplicationController
   def create
     address = params[:address]
     coords = lat_long(address)
-    sunlight_url =  "https://congress.api.sunlightfoundation.com/legislators/locate?latitude=#{coords[0]}&longitude=#{coords[1]}"
-    json = HTTParty.get(sunlight_url)
-    reps = []
-    json["results"].each do |result|
-      reps << Legislator.find(result["bioguide_id"].to_s).id
+    if !coords.nil?
+      sunlight_url =  "https://congress.api.sunlightfoundation.com/legislators/locate?latitude=#{coords[0]}&longitude=#{coords[1]}"
+      json = HTTParty.get(sunlight_url)
+      reps = []
+      json["results"].each do |result|
+        reps << Legislator.find(result["bioguide_id"].to_s).id
+      end
+      session[:reps] = reps
+      flash[:success] = "Found your legislators!"
+      redirect_to legislators_path
+    else
+      flash[:danger] = "Please retype your address"
+      redirect_to root_path
     end
-    session[:reps] = reps
-    flash[:success] = "Found your legislators!"
-    redirect_to legislators_path
   end
 
   private
