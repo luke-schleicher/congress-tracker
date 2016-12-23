@@ -40,7 +40,7 @@
         <h3>Bills sponsored <small>(since <%= @first_bill_date %>)</small></h3>
         <ul class="legislator-bills-list">
           <% @sponsored_bills.each do |bill| %>
-            <li><%= link_to bill[:id].upcase, bill_path(bill[:id]) %> <%= bill[:title] %></li>
+            <li><%= link_to bill[:id].upcase, bill_path(bill[:id]) %> <%= bill[:official_title] %></li>
           <% end %>
         </ul>
       <% end %>

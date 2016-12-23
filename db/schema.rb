@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20161223044307) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "bill_id"
-    t.string   "sponsor_id"
     t.boolean  "enacted"
+    t.string   "sponsor_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
