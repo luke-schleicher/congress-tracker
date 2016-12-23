@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223010608) do
+ActiveRecord::Schema.define(version: 20161223044307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20161223010608) do
     t.datetime "updated_at",     null: false
     t.string   "bill_id"
     t.string   "sponsor_id"
+    t.boolean  "enacted"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 20161223010608) do
     t.string   "vote_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date     "voted_at"
     t.index ["voter_id", "bill_id"], name: "index_votes_on_voter_id_and_bill_id", using: :btree
   end
 

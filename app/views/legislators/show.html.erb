@@ -1,12 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-3">
-      <div class="congressman">
-        <%= image_tag @legislator.photo_url %>
-        <div class="identifier">
-          <%= "#{@legislator.first_name} #{@legislator.last_name} (#{@legislator.party}-#{@legislator.state})" %>
-        </div>
-      </div>
+      <%= render partial: 'shared/legislator_photo_block', locals: { legislator: @legislator } %>
       <div>
         <p>Term start: <%= @legislator.term_start %>
         <p>Term end: <%= @legislator.term_end %>
@@ -43,9 +38,9 @@
     <div class="col-lg-6">
       <% if @bills.count > 0 %>
         <h3>Bills voted on <small>(since <%= @first_bill_date %>)</small></h3>
-        <ul>
+        <ul class="legislator-bills-list">
           <% @bills.each do |bill| %>
-            <li><%= colored_yea_nay(bill[:vote]) %> <%= bill[:title] %></li>
+            <li><%= colored_yea_nay(bill[:vote]) %> <%= link_to bill[:id].upcase, bill_path(bill[:id]) %> <%= bill[:title] %></li>
           <% end %>
         </ul>
       <% end %>
