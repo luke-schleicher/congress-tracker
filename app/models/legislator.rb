@@ -25,17 +25,19 @@ class Legislator < ApplicationRecord
   end
 
 
-  def open_secrets_hash(crpId)
+  def get_top_contributors(crpId)
     url = "https://www.opensecrets.org/api/?method=candContrib&cid=#{crpId}&cycle=2016&output=json&apikey=#{OPEN_SECRETS_KEY}"
     response = HTTParty.get(url)
-    top_contributions =JSON.parse(response)["response"]["contributors"]["contributor"]
+    JSON.parse(response)["response"]["contributors"]["contributor"]
   end
 
   def top_contributors
 
   end
 
-  helper :top_contributors
+    helper :top_contributors
+  end
+
 
 
 
