@@ -119,7 +119,6 @@ bill_data.each.with_index do |page, i|
   page["results"].each do |bill|
     b = Bill.new
 
-    already_been_dun << bill["bill_id"]
     b.bill_id = bill["bill_id"]
 
     b.official_title = bill["official_title"]
@@ -130,6 +129,7 @@ bill_data.each.with_index do |page, i|
     b.sponsor_id = bill["sponsor_id"]
     b.keywords = bill["keywords"]
     b.save unless already_been_dun.include?(bill["bill_id"])
+    already_been_dun << bill["bill_id"]
   end
   puts "Compiled bill data from page #{i} of Sunlight's database."
 end
@@ -155,6 +155,7 @@ end
 
 puts "Getting votes..."
 
+been_dun_part_revenge = []
 vote_data.each.with_index do |page, i|
   page["results"].each do |vote|
     bill_id = vote["bill_id"]
@@ -163,7 +164,8 @@ vote_data.each.with_index do |page, i|
       v.bill_id = bill_id
       v.voter_id = voter
       v.vote_type = type
-      v.save
+      v.save unless been_dun_part_revenge.include?(bill_id)
+      been_dun_part_revenge << bill_id
     end
   end
   puts "Compiled vote data from page #{i} of Sunlight's database."
