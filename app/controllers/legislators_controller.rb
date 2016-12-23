@@ -17,12 +17,13 @@ class LegislatorsController < ApplicationController
 
   def show
     @legislator = Legislator.find(params[:bioguide_id])
-    @bills = @legislator.bills.map do |bill|
+    @bills = @legislator.bills.uniq.map do |bill|
       {
         vote: bill.votes.where(voter_id: @legislator.id).last.vote_type,
         title: bill.official_title
       }
     end
-    @first_bill_date = Bill.order(last_vote_at: :asc).first.last_vote_at
+    first_bill = Bill.order(last_vote_at: :asc).first
+    @first_bill_date = first_bill.last_vote_at if first_bill
   end
 end

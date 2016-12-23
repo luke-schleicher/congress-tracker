@@ -101,7 +101,7 @@ puts "Legislators... created"
 ########################
 
 NUMBER_OF_BILL_PAGES = 13
-bills = "bills?congress=114&history.enacted=true&page="
+bills = "bills?congress=114&history.page="
 bill_data = []
 
 NUMBER_OF_BILL_PAGES.times do |page|
