@@ -12,7 +12,21 @@ class UsersController < ApplicationController
       flash[:danger] = "We were unable to add your email to our mailing list"
       redirect_back(fallback_location: legislators_path)
     end
+  end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:success] = "We've removed your email from the subscriber list"
+      redirect_to root_path
+    else
+      flash[:error] = "No email address found"
+      redirect_to root_path
+    end
   end
 
   private

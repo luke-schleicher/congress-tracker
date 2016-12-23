@@ -17,16 +17,14 @@ ActiveRecord::Schema.define(version: 20161223164319) do
 
   create_table "bills", force: :cascade do |t|
     t.string   "official_title"
-    t.string   "popular_title"
-    t.text     "summary_short"
     t.date     "introduced_on"
     t.date     "last_vote_at"
     t.text     "keywords"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "bill_id"
-    t.boolean  "enacted"
     t.string   "sponsor_id"
+    t.boolean  "enacted"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|

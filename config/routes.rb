@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
-  resources :users, only: [:create]
+  resources :users, only: [:create, :edit, :destroy]
   resources :legislators, param: :bioguide_id
   resources :bills, param: :bill_id
   resource :session, only: [:new, :create, :destroy]
