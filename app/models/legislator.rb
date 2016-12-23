@@ -28,4 +28,24 @@ class Legislator < ApplicationRecord
     first_name + " " + last_name
   end
 
+  def request_contributions
+    crpId = self.crf_id
+    api_key = ENV["OPEN_SECRETS_KEY"]
+    url = "https://www.opensecrets.org/api/?method=candContrib&cid=#{crpId}&cycle=2016&output=json&apikey=#{api_key}"
+    response = HTTParty.get(url)
+    JSON.parse(response)["response"]["contributors"]["contributor"]
+  end
+
+  def top_contributions
+    top_three = {}
+    all_contributions = request_contributions
+    3.times do |i|
+      contribution = all_contributions[i].first.last
+      org = contribution["org_name"]
+      amount = contribution["total"].to_s
+      top_three[i] = [org, amount]
+    end
+    top_three
+  end
+
 end
