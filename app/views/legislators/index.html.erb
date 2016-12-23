@@ -25,39 +25,17 @@
       </div>
     </div>
     <div class="col-lg-4">
-      <%= form_tag "/reps/find", method: :get, class: 'form' do %>
-        <div class="form-group">
-          <%= label_tag 'congressman_search', "Find a congressman:" %>
-          <%= text_field_tag(
-              :congressman_search,
-              params[:congressman_search],
-              placeholder: "Search",
-              class: "form-control"
-          ) %>
-          <%= submit_tag "Search", class:'sr-only' %>
-        </div>
-      <% end %>
-      <%= form_tag "/bills/find", method: :get, class: 'form' do %>
-        <div class="form-group">
-          <%= label_tag 'bill_search', "Find a bill:" %>
-          <%= text_field_tag(
-              :bill_search,
-              params[:bill_search],
-              placeholder: "Search",
-              class: "form-control"
-          ) %>
-          <%= submit_tag "Search", class:'sr-only' %>
-        </div>
-      <% end %>
       <%= form_for @user, class: 'form' do |f| %>
-        <div class="form-group">
-          <%= f.label :email, "Get email updates about your legislators:" %>
+      <%= f.label :email, "Get email updates about your legislators:" %>
+        <div class="input-group">
           <%= f.text_field(
               :email,
               placeholder: "email",
               class: "form-control"
           ) %>
-          <%= f.submit "Submit" %>
+          <span class="input-group-btn">
+            <%= f.submit "Submit", class: "btn btn-default" %>
+          </span>
         </div>
       <% end %>
     </div>
