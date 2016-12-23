@@ -24,8 +24,6 @@ class Legislator < ApplicationRecord
     votes.where(voted_at: (Time.now.midnight - 14.day)..Time.now.midnight).limit(5)
   end
 
-
-
   def request_contributions
     crpId = self.crf_id
     api_key = ENV["OPEN_SECRETS_KEY"]
@@ -34,7 +32,7 @@ class Legislator < ApplicationRecord
     JSON.parse(response)["response"]["contributors"]["contributor"]
   end
 
-  def top_contributions#(crpId)
+  def top_contributions
     top_three = {}
     all_contributions = request_contributions
     # binding.pry
@@ -44,9 +42,9 @@ class Legislator < ApplicationRecord
       amount = contribution["total"].to_s
       top_three[i] = [org, amount]
     end
-    puts top_three
     top_three
   end
+
   # helper :top_contributions
 
   # {0=>["Eye of the Tiger PAC", "10000"], 1=>["Majority Cmte PAC", "10000"], 2=>["New Cuba PAC", "10000"]}
