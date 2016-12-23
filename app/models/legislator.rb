@@ -24,4 +24,19 @@ class Legislator < ApplicationRecord
     votes.where(voted_at: (Time.now.midnight - 14.day)..Time.now.midnight).limit(5)
   end
 
+
+  def open_secrets_hash(crpId)
+    url = "https://www.opensecrets.org/api/?method=candContrib&cid=#{crpId}&cycle=2016&output=json&apikey=#{OPEN_SECRETS_KEY}"
+    response = HTTParty.get(url)
+    top_contributions =JSON.parse(response)["response"]["contributors"]["contributor"]
+  end
+
+  def top_contributors
+
+  end
+
+  helper :top_contributors
+
+
+
 end
