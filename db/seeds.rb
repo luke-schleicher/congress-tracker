@@ -157,13 +157,10 @@ puts "Getting votes..."
 vote_data.each.with_index do |page, i|
   page["results"].each do |vote|
 
-    bill_id = vote["bill_id"]
-    voted_at = vote["voted_at"]
-
     vote["voter_ids"].each do |voter, type|
       v = Vote.new
-      v.bill_id = bill_id
-      v.voted_at = voted_at
+      v.bill_id = vote["bill_id"]
+      v.voted_at = vote["voted_at"]
       v.voter_id = voter
       v.vote_type = type
       v.save 
