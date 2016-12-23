@@ -163,7 +163,7 @@ vote_data.each.with_index do |page, i|
       v.voted_at = vote["voted_at"]
       v.voter_id = voter
       v.vote_type = type
-      v.save 
+      v.save
 
     end
   end
