@@ -31,8 +31,8 @@ ENDPOINT = "https://congress.api.sunlightfoundation.com/"
 
 puts "Getting legislators..."
 
-NUMBER_OF_LEGISLATOR_PAGES = 27 # 27
-legislators = "legislators?fields=bioguide_id,fax,first_name,last_name,birthday,chamber,gender,oc_email,party,phone,state,term_end,term_start,website,twitter_id,facebook_id,youtube_id,votesmart_id,office&page="
+NUMBER_OF_LEGISLATOR_PAGES = 0 # 27
+legislators = "legislators?fields=bioguide_id,fax,first_name,last_name,birthday,chamber,gender,oc_email,party,phone,state,term_end,term_start,website,twitter_id,facebook_id,youtube_id,votesmart_id,crp_id,office&page="
 legislator_data = []
 
 NUMBER_OF_LEGISLATOR_PAGES.times do |page|
@@ -102,9 +102,8 @@ puts "Legislators... created"
 ########################
 # Bills
 ########################
-<<<<<<< HEAD
 
-NUMBER_OF_BILL_PAGES = 20 #20
+NUMBER_OF_BILL_PAGES = 0 #20
 bills = "bills?congress=114&fields=bill_id,official_title,popular_title,summary_short,introduced_on,sponsor_id,last_vote_at,keywords,history.enacted&order=history.enacted&per_page=50&page="
 bill_data = []
 
@@ -145,7 +144,7 @@ puts "Finished adding bills to database"
 ########################
 
 
-NUMBER_OF_VOTE_PAGES = 92 # 92
+NUMBER_OF_VOTE_PAGES = 0 # 92
 
 votes = "votes?congress=114&fields=voter_ids,bill_id,voted_at&page="
 vote_data = []

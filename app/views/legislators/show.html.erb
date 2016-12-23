@@ -1,13 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-2">
       <%= render partial: 'shared/legislator_photo_block', locals: { legislator: @legislator } %>
       <div>
         <p>Term start: <%= @legislator.term_start %>
         <p>Term end: <%= @legislator.term_end %>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4">
+      <h3>Contact info</h3>
       <p>
         <% if @legislator.phone %>Phone: <%= @legislator.phone %><br><% end %>
         <% if @legislator.fax %>Fax: <%= @legislator.fax %><br><% end %>
@@ -34,6 +35,14 @@
           <% end %>
         <% end %>
       </div>
+      <% if @top_contributions %>
+        <h3>Top Contributors</h3>
+        <ul class="legislator-bills-list">
+          <% @top_contributions.each do |contributor| %>
+            <li><%= contributor[1][0] %>: <%= number_to_currency(contributor[1][1].to_i, precision: 0) %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
     <div class="col-lg-6">
       <% if @sponsored_bills.count > 0 %>
