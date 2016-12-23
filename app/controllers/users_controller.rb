@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       flash[:success] = "Email successfully added! Check your inbox each week for updates"
       redirect_back(fallback_location: legislators_path)
     else
-      flash[:error] = "We were unable to add your email to our mailing list"
+      flash[:danger] = "We were unable to add your email to our mailing list"
       redirect_back(fallback_location: legislators_path)
     end
 
