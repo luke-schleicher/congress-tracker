@@ -10,9 +10,8 @@
     <div class="col-lg-4">
       <h3>Contact info</h3>
       <p>
-        <% if @legislator.phone %>Phone: <%= @legislator.phone %><br><% end %>
-        <% if @legislator.fax %>Fax: <%= @legislator.fax %><br><% end %>
-        <% if @legislator.email %>Email: <%= @legislator.email %><% end %>
+        <% if @legislator.phone %> <%= fa_icon "phone" %> <%= @legislator.phone %><br><% end %>
+        <% if @legislator.email %> <%= fa_icon "envelope" %> <%= @legislator.email %><% end %>
       </p>
       <p>
         <% if @legislator.website %><%= link_to "Website", @legislator.website, target: '_blank' %><br><% end %>

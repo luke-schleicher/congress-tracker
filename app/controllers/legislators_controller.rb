@@ -1,16 +1,20 @@
 class LegislatorsController < ApplicationController
 
   def index
-    bioguide_ids = session[:reps]
-    @user = User.new
-    @reps = []
-    @senators = []
-    bioguide_ids.each do |bioguide_id|
-      current = Legislator.find(bioguide_id)
-      if current.chamber == "house"
-        @reps << current
-      elsif current.chamber == "senate"
-        @senators << current
+    if session[:reps].nil?
+      redirect_to root_path
+    else
+      bioguide_ids = session[:reps]
+      @user = User.new
+      @reps = []
+      @senators = []
+      bioguide_ids.each do |bioguide_id|
+        current = Legislator.find(bioguide_id)
+        if current.chamber == "house"
+          @reps << current
+        elsif current.chamber == "senate"
+          @senators << current
+        end
       end
     end
   end

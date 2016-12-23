@@ -5,10 +5,7 @@
       <div class="congressmen">
         <% @reps.each do |rep| %>
           <a class="congressman" href="<%= legislator_path(rep.id) %>">
-            <%= image_tag rep.photo_url %>
-            <div class="identifier">
-              <%= "#{rep.first_name} #{rep.last_name} (#{rep.party}-#{rep.state})" %>
-            </div>
+            <%= render partial: 'shared/legislator_photo_block', locals: { legislator: rep } %>
           </a>
         <% end %>
       </div>
@@ -16,10 +13,7 @@
       <div class="congressmen">
         <% @senators.each do |senator| %>
           <a class="congressman" href="<%= legislator_path(senator.id) %>">
-            <%= image_tag senator.photo_url %>
-            <div class="identifier">
-              <%= "#{senator.first_name} #{senator.last_name} (#{senator.party}-#{senator.state})" %>
-            </div>
+            <%= render partial: 'shared/legislator_photo_block', locals: { legislator: senator } %>
           </a>
         <% end %>
       </div>
