@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(whitelisted_params)
     if @user.save
-
       User.delay.welcome_email(@user.id)
       User.delay.weekly_email(@user.id)
       flash[:success] = "Email successfully added! Check your inbox each week for updates"

@@ -6,7 +6,7 @@ puts "Removing records"
 
 Legislator.destroy_all
 Bill.destroy_all
-# Vote.destroy_all
+Vote.destroy_all
 
 puts "Records removed"
 
@@ -89,7 +89,6 @@ legislator_data.each.with_index do |page, i|
     l.bioguide_id = legislator["bioguide_id"]
     l.save
 
-    puts $fuck if l.votesmart_id.nil?
   end
 end
 
@@ -101,7 +100,9 @@ puts "Legislators... created"
 ########################
 
 NUMBER_OF_BILL_PAGES = 13
-bills = "bills?congress=114&history.page="
+
+bills = "bills?congress=114&page="
+
 bill_data = []
 
 NUMBER_OF_BILL_PAGES.times do |page|
@@ -126,6 +127,7 @@ bill_data.each.with_index do |page, i|
     b.summary_short = bill["summary_short"]
     b.introduced_on = bill["introduced_on"]
     b.last_vote_at = bill["last_vote_at"]
+    b.sponsor_id = bill["sponsor_id"]
     b.keywords = bill["keywords"]
     b.save
   end
@@ -139,7 +141,7 @@ puts "Finished adding bills to database"
 ########################
 
 
-NUMBER_OF_VOTE_PAGES = 92 # 92
+NUMBER_OF_VOTE_PAGES = 2 # 92
 
 votes = "votes?congress=114&fields=voter_ids,bill_id&page="
 vote_data = []
