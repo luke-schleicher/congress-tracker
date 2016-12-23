@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
 
   def weekly_email(user)
     @user = user
-    mail(to: @user.email, subject: "Here's what your lawmakers have been up to this week")
+    mail(to: @user.email, subject: "Your weekly lawmaker summary")
   end
 
 

@@ -28,7 +28,7 @@
       <%= form_for @user, class: 'form' do |f| %>
       <%= f.label :email, "Get email updates about your legislators:" %>
         <div class="input-group">
-          <%= f.text_field(
+          <%= f.email_field(
               :email,
               placeholder: "email",
               class: "form-control"
