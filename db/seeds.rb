@@ -143,7 +143,7 @@ puts "Finished adding bills to database"
 
 NUMBER_OF_VOTE_PAGES = 2 # 92
 
-votes = "votes?congress=114&fields=voter_ids,bill_id&page="
+votes = "votes?congress=114&fields=voter_ids,bill_id,voted_at&page="
 vote_data = []
 
 NUMBER_OF_VOTE_PAGES.times do |page|
@@ -159,11 +159,13 @@ been_dun_part_revenge = []
 vote_data.each.with_index do |page, i|
   page["results"].each do |vote|
     bill_id = vote["bill_id"]
+    voted_at = vote["voted_at"]
     vote["voter_ids"].each do |voter, type|
       v = Vote.new
       v.bill_id = bill_id
       v.voter_id = voter
       v.vote_type = type
+      v.voted_at = voted_at
       v.save unless been_dun_part_revenge.include?(bill_id)
       been_dun_part_revenge << bill_id
     end

@@ -2,7 +2,7 @@ class Bill < ApplicationRecord
 
   self.primary_key = 'bill_id'
 
-  has_many :votes
+  has_many :votes, foreign_key: :bill_id
   has_many :legislators, through: :votes
 
   belongs_to :sponsor, foreign_key: :sponsor_id, class_name: 'Legislator'
