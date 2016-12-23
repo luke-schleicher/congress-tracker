@@ -6,9 +6,13 @@ class User < ApplicationRecord
     UserMailer.welcome(find(id)).deliver
   end
 
-  def send_weekly_emails
-    User.all.each do |u|
-      UserMailer.delay.weekly_email(u).deliver
+  def self.weekly_email(id = nil)
+    if id.nil?
+      User.all.each do |u|
+        UserMailer.delay.weekly_email(u).deliver
+      end
+    else
+      UserMailer.weekly_email(find(id)).deliver
     end
   end
 
