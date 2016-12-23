@@ -17,5 +17,12 @@ class LegislatorsController < ApplicationController
 
   def show
     @legislator = Legislator.find(params[:bioguide_id])
+    @bills = @legislator.bills.map do |bill|
+      {
+        vote: bill.votes.where(voter_id: @legislator.id).last.vote_type,
+        title: bill.official_title
+      }
+    end
+    @first_bill_date = Bill.order(last_vote_at: :asc).first.last_vote_at
   end
 end
