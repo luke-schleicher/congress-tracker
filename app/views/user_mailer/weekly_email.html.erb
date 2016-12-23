@@ -1,2 +1,21 @@
 <h1>Here's how your lawmakers voted this week:</h1>
 
+<% @user.legislators.each do |leg| %>
+
+  <h3><%= leg.name %></h3>
+
+  <% if leg.five_recent_votes.any? %>
+
+    <% leg.five_recent_votes.each do |vote| %>
+
+      <p><%= vote.bill_id %>: <%= vote.type %></p>
+
+    <% end %>
+
+  <% else %>
+
+    <p>No recent votes</p>
+
+  <% end %>
+
+<% end %>
