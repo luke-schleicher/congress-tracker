@@ -24,4 +24,8 @@ class Legislator < ApplicationRecord
     votes.where(voted_at: (Time.now.midnight - 14.day)..Time.now.midnight).limit(5)
   end
 
+  def name
+    first_name + " " + last_name
+  end
+
 end
