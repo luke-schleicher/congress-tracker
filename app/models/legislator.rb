@@ -12,6 +12,10 @@ class Legislator < ApplicationRecord
     "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{self.votesmart_id}.jpg"
   end
 
+  def name
+    first_name + " " + last_name
+  end
+
   def bioguide_id
     bioguide_id
   end
