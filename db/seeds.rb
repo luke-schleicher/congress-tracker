@@ -4,9 +4,10 @@
 
 puts "Removing records"
 
-Legislator.destroy_all
-Bill.destroy_all
-Vote.destroy_all
+
+# Legislator.destroy_all
+# Bill.destroy_all
+# Vote.destroy_all
 
 puts "Records removed"
 
@@ -57,6 +58,9 @@ legislator_data.each.with_index do |page, i|
     l.website = legislator["website"]
     l.term_start = legislator["term_start"]
     l.term_end = legislator["term_end"]
+
+    l.crf_id = legislator["crp_id"]
+
     l.state = legislator["state"]
 
     sunset_state = legislator["state"]
@@ -98,6 +102,7 @@ puts "Legislators... created"
 ########################
 # Bills
 ########################
+<<<<<<< HEAD
 
 NUMBER_OF_BILL_PAGES = 20 #20
 bills = "bills?congress=114&fields=bill_id,official_title,popular_title,summary_short,introduced_on,sponsor_id,last_vote_at,keywords,history.enacted&order=history.enacted&per_page=50&page="
@@ -171,3 +176,77 @@ vote_data.each.with_index do |page, i|
 end
 
 puts "Finished compiling vote data"
+
+#
+# NUMBER_OF_BILL_PAGES = 20 #20
+# bills = "bills?congress=114&fields=bill_id,official_title,popular_title,summary_short,introduced_on,sponsor_id,last_vote_at,keywords,history.enacted&order=history.enacted&per_page=50&page="
+# bill_data = []
+#
+# NUMBER_OF_BILL_PAGES.times do |page|
+#   bill_page = bills + (page + 1).to_s
+#   url = build_url(bill_page)
+#   response = HTTParty.get(url)
+#   bill_data << response
+# end
+#
+# puts "Getting bills..."
+#
+# already_been_dun = []
+# bill_data.each.with_index do |page, i|
+#   page["results"].each do |bill|
+#     b = Bill.new
+#
+#     b.bill_id = bill["bill_id"]
+#
+#     b.official_title = bill["official_title"]
+#     b.popular_title = bill["popular_title"]
+#     b.summary_short = bill["summary_short"]
+#     b.introduced_on = bill["introduced_on"]
+#     b.last_vote_at = bill["last_vote_at"]
+#     b.sponsor_id = bill["sponsor_id"]
+#     b.keywords = bill["keywords"]
+#     b.enacted = bill["history"]["enacted"]
+#     b.save unless already_been_dun.include?(bill["bill_id"])
+#     already_been_dun << bill["bill_id"]
+#   end
+#   puts "Compiled bill data from page #{i} of Sunlight's database."
+# end
+#
+# puts "Finished adding bills to database"
+#
+# ########################
+# # Votes
+# ########################
+#
+#
+# NUMBER_OF_VOTE_PAGES = 5 # 92
+#
+# votes = "votes?congress=114&fields=voter_ids,bill_id,voted_at&page="
+# vote_data = []
+#
+# NUMBER_OF_VOTE_PAGES.times do |page|
+#   vote_page = votes + (page + 1).to_s
+#   url = build_url(vote_page)
+#   response = HTTParty.get(url)
+#   vote_data << response
+# end
+#
+# puts "Getting votes..."
+#
+# vote_data.each.with_index do |page, i|
+#   page["results"].each do |vote|
+#
+#     vote["voter_ids"].each do |voter, type|
+#       v = Vote.new
+#       v.bill_id = vote["bill_id"]
+#       v.voted_at = vote["voted_at"]
+#       v.voter_id = voter
+#       v.vote_type = type
+#       v.save
+#
+#     end
+#   end
+#   puts "Compiled vote data from page #{i} of Sunlight's database."
+# end
+#
+# puts "Finished compiling vote data"
