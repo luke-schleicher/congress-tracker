@@ -25,19 +25,31 @@ class Legislator < ApplicationRecord
   end
 
 
-  def get_top_contributors(crpId)
-    url = "https://www.opensecrets.org/api/?method=candContrib&cid=#{crpId}&cycle=2016&output=json&apikey=#{OPEN_SECRETS_KEY}"
+
+  def request_contributions
+    crpId = self.crf_id
+    api_key = ENV["OPEN_SECRETS_KEY"]
+    url = "https://www.opensecrets.org/api/?method=candContrib&cid=#{crpId}&cycle=2016&output=json&apikey=#{api_key}"
     response = HTTParty.get(url)
     JSON.parse(response)["response"]["contributors"]["contributor"]
   end
 
-  def top_contributors
-
+  def top_contributions#(crpId)
+    top_three = {}
+    all_contributions = request_contributions
+    # binding.pry
+    3.times do |i|
+      contribution = all_contributions[i].first.last
+      org = contribution["org_name"]
+      amount = contribution["total"].to_s
+      top_three[i] = [org, amount]
+    end
+    puts top_three
+    top_three
   end
+  # helper :top_contributions
 
-    helper :top_contributors
-  end
-
+  # {0=>["Eye of the Tiger PAC", "10000"], 1=>["Majority Cmte PAC", "10000"], 2=>["New Cuba PAC", "10000"]}
 
 
 
