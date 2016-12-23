@@ -1,5 +1,5 @@
 <div class="congressman">
-  <%= image_tag legislator.photo_url %>
+  <%= image_tag legislator.photo_url, class: "legislator-photo" %>
   <div class="identifier">
     <%= "#{legislator.first_name} #{legislator.last_name} (#{legislator.party}-#{legislator.state})" %>
   </div>
