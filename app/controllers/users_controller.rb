@@ -4,8 +4,8 @@ class UsersController < ApplicationController
     @user = User.new(whitelisted_params)
     if @user.save
       @user.assign_legislators(session[:reps])
-      User.welcome_email(@user.id).deliver_later
-      User.weekly_email(@user.id).deliver_later
+      User.delay.welcome_email(@user.id)
+      User.delay.weekly_email(@user.id)
       flash[:success] = "Email successfully added! Check your inbox each week for updates"
       redirect_back(fallback_location: legislators_path)
     else
