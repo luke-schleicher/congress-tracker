@@ -21,7 +21,8 @@ class Legislator < ApplicationRecord
   end
 
   def five_recent_votes
-    votes.where(voted_at: (Time.now.midnight - 14.day)..Time.now.midnight).limit(5)
+    my_bills = bills.where(last_vote_at: (Time.now.midnight - 14.day)..Time.now.midnight).distinct.limit(5)
+    my_bills.map { |bill| bill.votes.where(voter_id: id).where.not(vote_type: "Not Voting").order(:voted_at).first }
   end
 
   def name

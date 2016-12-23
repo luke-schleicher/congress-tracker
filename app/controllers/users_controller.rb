@@ -6,10 +6,10 @@ class UsersController < ApplicationController
       @user.assign_legislators(session[:reps])
       User.delay.welcome_email(@user.id)
       User.delay.weekly_email(@user.id)
-      flash[:success] = "Email successfully added! Check your inbox each week for updates"
+      flash[:success] = "Email successfully added! Check your inbox each week for updates."
       redirect_back(fallback_location: legislators_path)
     else
-      flash[:danger] = "We were unable to add your email to our mailing list"
+      flash[:warning] = "We were unable to add your email to our mailing list."
       redirect_back(fallback_location: legislators_path)
     end
 

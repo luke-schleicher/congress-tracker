@@ -2,20 +2,14 @@
 
 <% @user.legislators.each do |leg| %>
 
-  <h3><%= leg.name %></h3>
+  <h3><%= link_to leg.name, legislator_url(leg.id) %></h3>
 
   <% if leg.five_recent_votes.any? %>
-
     <% leg.five_recent_votes.each do |vote| %>
-
-      <p><%= vote.bill_id %>: <%= vote.vote_type %></p>
-
+      <p><%= colored_yea_nay(vote.vote_type) %> <%= link_to vote.bill_id.upcase, bill_url(vote.bill.id) %> <%= vote.bill.official_title %></p>
     <% end %>
-
   <% else %>
-
     <p>No recent votes</p>
-
   <% end %>
 
 <% end %>

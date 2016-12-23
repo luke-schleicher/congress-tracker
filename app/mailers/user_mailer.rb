@@ -1,5 +1,7 @@
 class UserMailer < ApplicationMailer
 
+  helper MailerHelper
+
   default from: "welcome@congresstracker.com"
 
   def welcome(user)
