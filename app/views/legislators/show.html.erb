@@ -41,12 +41,14 @@
       </div>
     </div>
     <div class="col-lg-6">
-      <h3>Bills voted on <small>(Since <%= @first_bill_date %>)</small></h3>
-      <ul>
-        <% @bills.each do |bill| %>
-          <li><%= bill.official_title %></li>
-        <% end %>
-      </ul>
+      <% if @bills.count > 0 %>
+        <h3>Bills voted on <small>(since <%= @first_bill_date %>)</small></h3>
+        <ul>
+          <% @bills.each do |bill| %>
+            <li><%= colored_yea_nay(bill[:vote]) %> <%= bill[:title] %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 </div>
