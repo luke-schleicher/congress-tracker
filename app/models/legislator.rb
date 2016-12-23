@@ -4,6 +4,7 @@ class Legislator < ApplicationRecord
 
   has_many :votes, foreign_key: :voter_id
   has_many :bills, through: :votes
+  has_many :sponsored_bills, foreign_key: :sponsor_id, class_name: 'Bill'
 
   def photo_url
     "http://d229l5sflpl9cp.cloudfront.net/canphoto/#{self.votesmart_id}.jpg"
