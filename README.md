@@ -1,7 +1,6 @@
 # Congress Tracker
 
-[Link to Github](https://github.com/luke-schleicher/congress-tracker.git)
-[Link to Deployed App](https://ancient-everglades-28054.herokuapp.com/)
+[Deployed App](https://ancient-everglades-28054.herokuapp.com/)
 
 Completed by [Kenny Kottenstette](https://github.com/kotten1), [Luke Schleicher](https://github.com/luke-schleicher), [James Harris](https://github.com/DawnPaladin) and [Dexter Ford](https://github.com/dexterford77)
 
@@ -29,7 +28,7 @@ We made a technical decision to change the primary key on the legislators and bi
 
 Finally, the email updates are sent out through the Heroku add-on SendGrid. All emails are queued up as delayed jobs using the 'delayed job active record' gem. This keeps the main server free to accept requests, while a worker dyno fires up to send emails.
 
-## How To Run The App
+## How To Run Your Own Copy
 
 1. Clone the repo into a directory
 2. [Download and run Postgresql](https://www.postgresql.org/download/)
