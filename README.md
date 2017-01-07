@@ -1,6 +1,6 @@
 # Congress Tracker
 
-[Deployed App](https://ancient-everglades-28054.herokuapp.com/)
+[Deployed App](https://congress-tracking-app.herokuapp.com)
 
 Completed by [Kenny Kottenstette](https://github.com/kotten1), [Luke Schleicher](https://github.com/luke-schleicher), [James Harris](https://github.com/DawnPaladin) and [Dexter Ford](https://github.com/dexterford77)
 
