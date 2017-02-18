@@ -91,7 +91,7 @@ Rails.application.configure do
             :password       => ENV['SENDGRID_PASSWORD'],
             :domain         => 'heroku.com'
     }
-    config.action_mailer.default_url_options = { :host => 'ancient-everglades-28054.herokuapp.com' }
+    config.action_mailer.default_url_options = { :host => 'congress-tracking-app.herokuapp.com' }
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
