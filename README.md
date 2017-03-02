@@ -10,11 +10,23 @@ Find out who your representatives are and how they're voting
 
 The Congress Tracker app helps you stay up-to-date on what your legislators in Washington are doing.
 
-At the home page, you have the option to type in your address to locate your representatives. It accepts a variety of inputs including full address, zip, city, etc. Once you've entered your address and pressed "Search", the app will identify your senators and representative and display them on a legislators page. On the right you may enter your email to receive weekly updates on your legislators and their recent votes.
+At the home page, you have the option to type in your address to locate your representatives. It accepts a variety of inputs including full address, zip, city, etc. 
+
+![Searching For Legislators Based On Location](public/search.png)
+
+Once you've entered your address and pressed "Search", the app will identify your senators and representative and display them on a legislators page. On the right you may enter your email to receive weekly updates on your legislators and their recent votes.
+
+![Displaying Legislators](public/results.png)
+
+![Weekly Email](public/email.png)
 
 Clicking on a legislator brings you to an informational page which displays their basic information including contact details. It also displays a list of recent bills they've sponsored, bills they've recently voted on, and the main financial contributors to their campaign.
 
+![Displaying a Legislator](public/legislator.png)
+
 Clicking on a bill takes you to that bill's page. The bill displays the identifer, title, how members of Congress voted on the issue, and how your representatives voted.
+
+![Displaying Bill Data](public/bill.png)
 
 ## Technical Highlights
 
